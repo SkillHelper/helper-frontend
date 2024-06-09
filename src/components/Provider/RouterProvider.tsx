@@ -3,7 +3,6 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import PrivateRouter from "../Router/PrivateRouter";
-import { Suspense } from "react";
 import { QueryClient } from "@tanstack/react-query";
 import Index from "../../pages";
 import Login from "../../pages/login";

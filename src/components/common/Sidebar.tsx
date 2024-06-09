@@ -28,9 +28,9 @@ const menu: {
 ];
 
 interface ProfileProps {
-  profileImage: string;
-  email: string;
-  username: string;
+  profileImage?: string;
+  email?: string;
+  username?: string;
 }
 function Profile({ profileImage, email, username }: ProfileProps) {
   return (
