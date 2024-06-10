@@ -17,7 +17,7 @@ export default function ExplanationModal({ state, id }: Props) {
   const { mutate: createExplanation } = useCreateExplanation();
   const { mutate: updateExplanation } = useUpdateExplanation();
 
-  const [isOpen, toggleIsOpen] = state;
+  const [, toggleIsOpen] = state;
 
   const [title, setTitle] = useState<string>("");
   const [link, setLink] = useState<string>("");
