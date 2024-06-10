@@ -20,6 +20,5 @@ const Wrapper = styled.div`
 
   width: 100vw;
 
-  padding-top: 64px;
-  padding-left: 280px;
+  padding: 64px 0px 64px 280px;
 `;

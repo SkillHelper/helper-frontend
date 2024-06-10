@@ -23,7 +23,7 @@ interface noticeQuery {
 }
 export function useNotices(params: noticeQuery = {}) {
   return useQuery<Notice[]>({
-    queryKey: ["notice"],
+    queryKey: ["notice", params.category],
     queryFn: async () => {
       const { data } = await authInstance().get<Notice[]>("/notice", {
         params,

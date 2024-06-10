@@ -2,9 +2,15 @@ import styled from "styled-components";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import { useNotices } from "../hooks/notice";
 import MaterialIcon from "../components/atoms/MaterialIcon";
+import { useState } from "react";
 
 export default function Index() {
-  const { data: notices } = useNotices();
+  const [category, setCategory] = useState<
+    "전체" | "사이버보안" | "클라우드컴퓨팅"
+  >("전체");
+  const { data: notices } = useNotices({
+    ...(category === "전체" ? {} : { category }),
+  });
 
   return (
     <DashboardLayout>
@@ -17,9 +23,36 @@ export default function Index() {
           </Description>
         </TitleContent>
 
+        <CategoryWrapper>
+          <Category
+            onClick={() => {
+              setCategory("전체");
+            }}
+            $selected={category === "전체"}
+          >
+            전체
+          </Category>
+          <Category
+            onClick={() => {
+              setCategory("사이버보안");
+            }}
+            $selected={category === "사이버보안"}
+          >
+            사이버보안
+          </Category>
+          <Category
+            onClick={() => {
+              setCategory("클라우드컴퓨팅");
+            }}
+            $selected={category === "클라우드컴퓨팅"}
+          >
+            클라우드컴퓨팅
+          </Category>
+        </CategoryWrapper>
+
         <ContentWrapper>
-          {notices?.map((notice) => (
-            <Content>
+          {notices?.map((notice, index) => (
+            <Content key={index}>
               <div>
                 <p>
                   {notice.division} | {notice.date}
@@ -62,6 +95,26 @@ const Title = styled.h1`
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
+`;
+
+const CategoryWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const Category = styled.button<{
+  $selected: boolean;
+}>`
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: ${(props) => (props.$selected ? "#FFD6A5" : "#F5F5F5")};
+  /* color: ${(props) => (props.$selected ? "#FF6F61" : "#505D6F")}; */
+  font-size: 16px;
+  font-weight: ${(props) => (props.$selected ? 700 : 500)};
+  line-height: 20px;
+  cursor: pointer;
+  border: none;
 `;
 
 const Description = styled.p`
